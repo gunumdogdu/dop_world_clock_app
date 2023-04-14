@@ -24,14 +24,16 @@ class MyApp extends StatelessWidget {
             color: Colors.white,
             fontWeight: FontWeight.w500,
           ),
-          bodyLarge: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
           bodyMedium: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+            fontFamily: 'Montserrat',
+            fontSize: 15,
+            color: lightSecondaryColor,
           ),
+          bodySmall: TextStyle(
+              color: lightSecondaryColor,
+              fontSize: 12,
+              fontWeight: FontWeight.w300,
+              fontFamily: 'Montserrat'),
           displayMedium: TextStyle(
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w600,
