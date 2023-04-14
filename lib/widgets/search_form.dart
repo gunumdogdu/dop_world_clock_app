@@ -1,3 +1,4 @@
+import 'package:dop/constants/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -14,7 +15,7 @@ class SearchForm extends StatelessWidget {
     return SizedBox(
       height: 44,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 33, vertical: 0),
+        padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 0),
         child: Form(
           child: TextFormField(
             decoration: InputDecoration(
@@ -26,7 +27,7 @@ class SearchForm extends StatelessWidget {
               enabledBorder: outlineInputBorder,
               focusedBorder: outlineInputBorder,
               prefixIcon: Padding(
-                padding: const EdgeInsets.fromLTRB(15, 12, 10, 12),
+                padding: EdgeInsets.fromLTRB(15.w, 12.h, 10.w, 12.h),
                 child: SvgPicture.asset(searchIcon),
               ),
             ),

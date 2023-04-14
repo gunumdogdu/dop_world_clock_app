@@ -1,3 +1,4 @@
+import 'package:dop/constants/size.dart';
 import 'package:dop/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ class SplashScreen extends StatelessWidget {
         },
         child: Image.asset(
           dopLogoIcon,
+          scale: 1.a,
         ),
       ),
     );

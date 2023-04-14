@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/size.dart';
 
 class WelcomeDetail extends StatelessWidget {
   const WelcomeDetail({
@@ -8,7 +9,7 @@ class WelcomeDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 33, top: 69),
+      padding: EdgeInsets.only(left: 33.w, top: 69.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -16,15 +17,15 @@ class WelcomeDetail extends StatelessWidget {
             'Günaydın, Özgür!',
             style: Theme.of(context).textTheme.displayMedium,
           ),
-          const SizedBox(
-            height: 5,
+          SizedBox(
+            height: 5.h,
           ),
           Text(
             '09 : 54',
             style: Theme.of(context).textTheme.displayLarge,
           ),
-          const SizedBox(
-            height: 5,
+          SizedBox(
+            height: 5.h,
           ),
           Text(
             '8 Haziran Çarşamba',

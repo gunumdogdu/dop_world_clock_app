@@ -14,46 +14,45 @@ class TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 199,
+      height: 199.h,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: lightPrimaryColor,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(32),
-          bottomRight: Radius.circular(32),
+          bottomLeft: Radius.circular(kRadiusTopBar),
+          bottomRight: Radius.circular(kRadiusTopBar),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const WelcomeDetail(),
-          SizedBox(
-            height: 70,
-            width: 70,
-            child: IconButton(
-              padding: const EdgeInsets.only(right: 33),
-              onPressed: () {}, // DARK - LIGHT THEME BUTTON PRESS FUNCTION
-              icon: Container(
+      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        const WelcomeDetail(),
+        Padding(
+          padding: EdgeInsets.only(
+            right: 33.w,
+          ),
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+                height: 41.h,
+                width: 41.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
                     width: 3,
                     color: lightSecondaryColorWO,
                   ),
+                  color: lightSecondaryColor,
                 ),
-                child: CircleAvatar(
-                  radius: 35,
-                  backgroundColor: lightSecondaryColor,
+                child: Transform.scale(
+                  scale: 0.6,
                   child: SvgPicture.asset(
                     moonIcon,
-                    height: 14.97,
+                    height: 14.97.h,
+                    width: 14.97.h,
                   ),
-                ),
-              ),
-            ),
+                )),
           ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 }
