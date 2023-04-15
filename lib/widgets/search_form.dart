@@ -1,3 +1,4 @@
+import 'package:dop/constants/color.dart';
 import 'package:dop/constants/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,17 +21,48 @@ class SearchForm extends StatelessWidget {
           child: TextFormField(
             decoration: InputDecoration(
               hintText: 'Arama',
-              hintStyle: Theme.of(context).textTheme.bodySmall,
+              hintStyle: Theme.of(context).textTheme.bodyLarge,
               filled: true,
-              fillColor: Colors.white,
-              border: outlineInputBorder,
-              enabledBorder: outlineInputBorder,
-              focusedBorder: outlineInputBorder,
+              fillColor: Theme.of(context).colorScheme.onSurface,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    99,
+                  ),
+                ),
+                borderSide: BorderSide(
+                  strokeAlign: 1,
+                  color: lightOutlineColor,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    99,
+                  ),
+                ),
+                borderSide: BorderSide(
+                  strokeAlign: 1,
+                  color: lightOutlineColor,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(
+                    99,
+                  ),
+                ),
+                borderSide: BorderSide(
+                  strokeAlign: 1,
+                  color: lightOutlineColor,
+                ),
+              ),
               prefixIcon: Padding(
                 padding: EdgeInsets.fromLTRB(15.w, 12.h, 10.w, 12.h),
                 child: SvgPicture.asset(searchIcon),
               ),
             ),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
       ),

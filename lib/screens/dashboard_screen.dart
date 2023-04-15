@@ -1,8 +1,7 @@
 import 'package:dop/constants/color.dart';
-import 'package:dop/constants/icons.dart';
+
 import 'package:dop/constants/size.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../widgets/citynamebar.dart';
 import '../widgets/search_form.dart';
@@ -14,11 +13,12 @@ class DashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: Stack(
         children: [
           Column(
             children: [
-              const TopBar(),
+              TopBar(),
               Padding(
                 padding: EdgeInsets.only(
                   top: 42.h,
@@ -40,15 +40,3 @@ class DashBoardScreen extends StatelessWidget {
     );
   }
 }
-
-const OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-  borderRadius: BorderRadius.all(
-    Radius.circular(
-      99,
-    ),
-  ),
-  borderSide: BorderSide(
-    strokeAlign: 1,
-    color: lightOutlineColor,
-  ),
-);

@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.5
   sizer: ^2.0.15
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,9 @@ flutter:
     - assets/icons/frontNav.svg
     - assets/icons/arrowleft.svg
     - assets/icons/headline.png
+    - assets/icons/arrow-left.png
+    - assets/icons/dot.svg
+    - assets/icons/sun.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -19,11 +19,11 @@ class CityNameBar extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 33.w),
           child: Container(
             alignment: Alignment.centerLeft,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
                 Radius.circular(8.0),
               ),
-              color: lightPrimaryColor,
+              color: Theme.of(context).colorScheme.primary,
             ),
             height: 54.h,
             width: double.infinity,
@@ -55,15 +55,17 @@ class CityNameBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
-                    width: 6,
-                    color: Colors.white,
+                    width: 3,
+                    color: Theme.of(context).colorScheme.background,
                   ),
-                  color: lightPrimaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
                 child: Transform.scale(
-                  scale: 0.6,
+                  scale: 0.5,
                   child: SvgPicture.asset(
                     frontNavIcon,
+                    // ignore: deprecated_member_use
+                    color: Theme.of(context).colorScheme.secondary,
                     height: 9.92.h,
                     width: 4.96.h,
                   ),

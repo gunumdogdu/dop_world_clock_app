@@ -1,54 +1,26 @@
-import 'package:dop/constants/color.dart';
 import 'package:dop/screens/splash_screen.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'constants/themecontroller.dart';
 
 void main() {
+  Get.put(ThemeController());
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Digital Operation Services',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Montserrat',
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-            fontWeight: FontWeight.w500,
-          ),
-          bodyMedium: TextStyle(
-            fontFamily: 'Montserrat',
-            fontSize: 15,
-            color: lightSecondaryColor,
-          ),
-          bodySmall: TextStyle(
-              color: lightSecondaryColor,
-              fontSize: 12,
-              fontWeight: FontWeight.w300,
-              fontFamily: 'Montserrat'),
-          displayMedium: TextStyle(
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w600,
-            fontSize: 15,
-            color: lightSecondaryColor,
-          ),
-          displayLarge: TextStyle(
-            fontFamily: 'Montserrat',
-            fontWeight: FontWeight.w600,
-            fontSize: 32,
-            color: lightSecondaryColor,
-          ),
-        ),
-      ),
-      home: SplashScreen(),
+      title: 'DOP',
+      theme: LightTheme.data,
+      darkTheme: DarkTheme.data,
+      home: const SplashScreen(),
     );
   }
 }

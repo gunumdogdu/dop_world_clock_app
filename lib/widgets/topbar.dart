@@ -1,58 +1,66 @@
 import 'package:dop/widgets/welcome_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../constants/color.dart';
 import '../constants/icons.dart';
 import '../constants/size.dart';
+import '../constants/themecontroller.dart';
 
 class TopBar extends StatelessWidget {
-  const TopBar({
+  TopBar({
     super.key,
   });
+
+  final themeController = Get.find<ThemeController>();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 199.h,
       width: double.infinity,
-      decoration: const BoxDecoration(
-        color: lightPrimaryColor,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(kRadiusTopBar),
           bottomRight: Radius.circular(kRadiusTopBar),
         ),
       ),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        const WelcomeDetail(),
-        Padding(
-          padding: EdgeInsets.only(
-            right: 33.w,
-          ),
-          child: InkWell(
-            onTap: () {},
-            child: Container(
-                height: 41.h,
-                width: 41.h,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    width: 3,
-                    color: lightSecondaryColorWO,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const WelcomeDetail(),
+          Padding(
+            padding: EdgeInsets.only(
+              right: 33.w,
+            ),
+            child: InkWell(
+              onTap: () {
+                themeController.changeTheme();
+              },
+              child: Container(
+                  height: 41.h,
+                  width: 41.h,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 3,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    color: Theme.of(context).colorScheme.secondary,
                   ),
-                  color: lightSecondaryColor,
-                ),
-                child: Transform.scale(
-                  scale: 0.6,
-                  child: SvgPicture.asset(
-                    moonIcon,
-                    height: 14.97.h,
-                    width: 14.97.h,
-                  ),
-                )),
+                  child: Transform.scale(
+                    scale: 0.6,
+                    child: SvgPicture.asset(
+                      themeController.isDarkMode ? sunIcon : moonIcon,
+                      height: 14.97.h,
+                      width: 14.97.h,
+                    ),
+                  )),
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
