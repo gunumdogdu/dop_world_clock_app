@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/icons.dart';
-import '../screens/dashboard_screen.dart';
 
 class SearchForm extends StatelessWidget {
   const SearchForm({
@@ -24,7 +23,7 @@ class SearchForm extends StatelessWidget {
               hintStyle: Theme.of(context).textTheme.bodyLarge,
               filled: true,
               fillColor: Theme.of(context).colorScheme.onSurface,
-              border: OutlineInputBorder(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(
                     99,
@@ -35,7 +34,7 @@ class SearchForm extends StatelessWidget {
                   color: lightOutlineColor,
                 ),
               ),
-              enabledBorder: OutlineInputBorder(
+              enabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(
                     99,
@@ -46,7 +45,7 @@ class SearchForm extends StatelessWidget {
                   color: lightOutlineColor,
                 ),
               ),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(
                     99,

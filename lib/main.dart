@@ -3,7 +3,7 @@ import 'package:dop/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'constants/themecontroller.dart';
+import 'models/themecontroller.dart';
 
 void main() {
   Get.put(ThemeController());

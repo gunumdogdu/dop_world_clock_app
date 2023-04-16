@@ -6,9 +6,29 @@ import 'package:dop/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class TheTimeScreen extends StatelessWidget {
-  const TheTimeScreen({super.key});
+  TheTimeScreen({
+    super.key,
+    // required this.hour,
+    // required this.minute,
+    required this.city,
+    // required this.continentName,
+    // required this.dayOfTheWeek,
+    // required this.utcOffSet,
+    // required this.month,
+    // required this.year,
+  });
+
+  // String hour;
+  // String minute;
+  // String continentName;
+  String city;
+  // var dayOfTheWeek;
+  // String utcOffSet;
+  // String month;
+  // String year;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +59,7 @@ class TheTimeScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pop(
                           MaterialPageRoute(
-                            builder: (_) => const DashBoardScreen(),
+                            builder: (_) => DashBoardScreen(),
                           ),
                         );
                       },
@@ -137,7 +157,7 @@ class TheTimeScreen extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  'Abidjan',
+                  city,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(

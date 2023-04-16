@@ -2,7 +2,7 @@ import 'package:dop/constants/size.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'color.dart';
+import '../constants/color.dart';
 
 class LightTheme {
   static const ColorScheme colorScheme = ColorScheme.light(
