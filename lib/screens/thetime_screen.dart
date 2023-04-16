@@ -8,28 +8,29 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../controller/datetime_controller.dart';
+
 class TheTimeScreen extends StatelessWidget {
   TheTimeScreen({
     super.key,
     // required this.hour,
     // required this.minute,
     required this.city,
-    // required this.continentName,
+    required this.continentName,
     // required this.dayOfTheWeek,
-    // required this.utcOffSet,
+    required this.cityUrl,
     // required this.month,
     // required this.year,
   });
 
   // String hour;
   // String minute;
-  // String continentName;
+  String continentName;
   String city;
   // var dayOfTheWeek;
-  // String utcOffSet;
-  // String month;
-  // String year;
+  String cityUrl;
 
+  // String month;
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -161,7 +162,7 @@ class TheTimeScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 Text(
-                  'Africa',
+                  continentName,
                   style: Theme.of(context).textTheme.titleSmall,
                 )
               ],
@@ -172,7 +173,7 @@ class TheTimeScreen extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  'Çarşamba, GMT +01:00',
+                  cityUrl,
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
                 Text(

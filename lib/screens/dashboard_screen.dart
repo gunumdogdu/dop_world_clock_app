@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/cityname_controller.dart';
-import '../models/datetime_controller.dart';
+import '../controller/datetime_controller.dart';
 import '../widgets/citynamebar.dart';
 import '../widgets/search_form.dart';
 import '../widgets/topbar.dart';
@@ -36,10 +36,22 @@ class DashBoardScreen extends StatelessWidget {
                         );
                       } else {
                         return ListView.builder(
-                          padding: EdgeInsets.symmetric(vertical: 12.h),
                           itemCount: cityController.cities.length,
-                          itemBuilder: (BuildContext context, dynamic index) {
+                          itemBuilder: (context, index) {
                             final city = cityController.cities[index];
+                            final List<String> cityData = city.name!.split('/');
+                            String cityTitle =
+                                ''; // 'africa/Tanzania/Addisababa'
+                            String citySubtitle = '';
+                            if (cityData.length >= 3) {
+                              cityTitle = cityData[2];
+                              citySubtitle = '${cityData[0]}, ${cityData[1]}';
+                            } else if (cityData.length == 2) {
+                              cityTitle = cityData[1];
+                              citySubtitle = cityData[0];
+                            } else {
+                              cityTitle = cityData[0];
+                            }
                             return Padding(
                               padding: EdgeInsets.only(
                                 bottom: 20.h,
@@ -48,10 +60,12 @@ class DashBoardScreen extends StatelessWidget {
                                 routeTheTimeScreen: () {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (_) => TheTimeScreen(
-                                            city: city.name!,
+                                            cityUrl: city.name!,
+                                            continentName: citySubtitle,
+                                            city: cityTitle,
                                           )));
                                 },
-                                nameOf: city.name ?? '',
+                                nameOf: ('$citySubtitle $cityTitle'),
                               ),
                             );
                           },

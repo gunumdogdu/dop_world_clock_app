@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CityController extends GetxController {
   var cities = <CityNames>[].obs;
@@ -13,20 +14,41 @@ class CityController extends GetxController {
   }
 
   Future<void> getCityNames() async {
-    final response = await http.get(
-      Uri.parse('http://worldtimeapi.org/api/timezone'),
-    );
-    if (response.statusCode == 200) {
-      var jsonResponse = jsonDecode(response.body);
-      List<CityNames> citiesList = [];
+    final prefs = await SharedPreferences.getInstance();
+    final citiesJson = prefs.getString('cities');
 
-      for (var i = 0; i < jsonResponse.length; i++) {
-        CityNames cityAll = CityNames(name: jsonResponse[i]);
-        citiesList.add(cityAll);
-      }
+    if (citiesJson != null) {
+      final citiesList = (jsonDecode(citiesJson) as List<dynamic>)
+          .map((e) => CityNames.fromJson(e as Map<String, dynamic>))
+          .toList();
       cities.value = citiesList;
     } else {
-      throw Exception('Failed to retrieve data');
+      try {
+        final response = await http.get(
+          Uri.parse('http://worldtimeapi.org/api/timezone'),
+        );
+        if (response.statusCode == 200) {
+          var jsonResponse = jsonDecode(response.body);
+          List<CityNames> citiesList = [];
+
+          for (var i = 0; i < jsonResponse.length; i++) {
+            CityNames cityAll = CityNames(name: jsonResponse[i]);
+            citiesList.add(cityAll);
+          }
+
+          final citiesJson = jsonEncode(citiesList);
+          await prefs.setString('cities', citiesJson);
+
+          cities.value = citiesList;
+        } else {
+          throw Exception('Failed to retrieve data');
+        }
+      } catch (e) {
+        // Handle error and try again
+        print('Error fetching city names: $e');
+        await Future.delayed(Duration(seconds: 5));
+        await getCityNames();
+      }
     }
   }
 }
@@ -37,43 +59,6 @@ class CityNames {
   CityNames({required this.name});
 
   CityNames.fromJson(Map<String, dynamic> json) : name = json['name'];
+
+  Map<String, dynamic> toJson() => {'name': name};
 }
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-
-// import 'citynames.dart';
-
-// void main() => runApp(MyApp());
-
-// class MyApp extends StatelessWidget {
-//   final CityController cityController = Get.put(CityController());
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetMaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text('Api Deneme'),
-//         ),
-//         body: Center(
-//           child: Obx(() {
-            // if (cityController.cities.isEmpty) {
-            //   return const CircularProgressIndicator();
-            // } else {
-//               return ListView.builder(
-//                 itemCount: cityController.cities.length,
-//                 itemBuilder: (context, index) {
-//                   final city = cityController.cities[index];
-//                   return ListTile(
-//                     title: Text(city.name ?? ''),
-//                   );
-//                 },
-//               );
-//             }
-//           }),
-//         ),
-//       ),
-//     );
-//   }
-// }
-
