@@ -12,10 +12,12 @@ import 'controller/themecontroller.dart';
 
 Future<void> main() async {
   Get.put(ThemeController());
-  runApp(EasyLocalization(
-      child: MyApp(),
-      supportedLocales: LangManager.instance.supportedLocales,
-      path: ApplicationConstants.LANG_ASSET_PATH));
+  runApp(
+      // EasyLocalization(
+      //   child:
+      MyApp());
+  // supportedLocales: LangManager.instance.supportedLocales,
+  // path: ApplicationConstants.LANG_ASSET_PATH));
 }
 
 class MyApp extends StatelessWidget {
