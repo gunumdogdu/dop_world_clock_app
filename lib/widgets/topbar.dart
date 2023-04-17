@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../constants/icons.dart';
 import '../constants/size.dart';
-import '../models/themecontroller.dart';
+import '../controller/themecontroller.dart';
 
 class TopBar extends StatelessWidget {
   TopBar({

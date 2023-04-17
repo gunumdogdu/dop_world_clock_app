@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../constants/size.dart';
 
 class WelcomeDetail extends StatelessWidget {
@@ -8,6 +9,10 @@ class WelcomeDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime now = DateTime.now();
+    String formattedTime = DateFormat('hh').format(now);
+    String formattedTimeMin = DateFormat('mm').format(now);
+    String dayMonthWeek = DateFormat('d MMMM EEEE').format(now);
     return Padding(
       padding: EdgeInsets.only(left: 33.w, top: 69.h),
       child: Column(
@@ -21,14 +26,14 @@ class WelcomeDetail extends StatelessWidget {
             height: 5.h,
           ),
           Text(
-            '09 : 54',
+            '$formattedTime : $formattedTimeMin',
             style: Theme.of(context).textTheme.displayLarge,
           ),
           SizedBox(
             height: 5.h,
           ),
           Text(
-            '8 Haziran Çarşamba',
+            dayMonthWeek,
             style: Theme.of(context).textTheme.displayMedium,
           ),
         ],

@@ -1,5 +1,5 @@
 import 'package:dop/constants/size.dart';
-import 'package:dop/screens/thetime_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +58,7 @@ class DashBoardScreen extends StatelessWidget {
                             }
                             return Padding(
                               padding: EdgeInsets.only(
-                                bottom: 20.h,
+                                bottom: 10.h,
                               ),
                               child: CityNameBar(
                                 routeTheTimeScreen: () {
@@ -66,7 +66,7 @@ class DashBoardScreen extends StatelessWidget {
                                       .fetchCityTime(citynameforURL!); //city
                                   Get.toNamed('/thetime/', arguments: {
                                     'city': cityTitle,
-                                    'cityUrl': city.name,
+                                    'loadCheck': citynameforURL,
                                     'continentName': citySubtitle,
                                   });
                                 },
@@ -87,7 +87,7 @@ class DashBoardScreen extends StatelessWidget {
             bottom: null,
             left: 0.w,
             right: 0.w,
-            child: const SearchForm(),
+            child: SearchForm(),
           ),
         ],
       ),

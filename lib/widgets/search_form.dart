@@ -61,7 +61,7 @@ class SearchForm extends StatelessWidget {
                 child: SvgPicture.asset(searchIcon),
               ),
             ),
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.labelMedium,
           ),
         ),
       ),

@@ -19,6 +19,11 @@ class LightTheme {
     colorScheme: colorScheme,
     fontFamily: 'Montserrat',
     textTheme: TextTheme(
+      labelMedium: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 15.a,
+        color: Colors.black,
+      ),
       titleLarge: TextStyle(
         fontSize: 79.a,
         fontFamily: 'Montserrat',
@@ -101,6 +106,11 @@ class DarkTheme {
         fontFamily: 'Montserrat',
         color: darkSecondaryColor,
         fontWeight: FontWeight.w500,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: 'Montserrat',
+        fontSize: 15.a,
+        color: Colors.black,
       ),
       titleMedium: TextStyle(
         fontSize: 24.a,

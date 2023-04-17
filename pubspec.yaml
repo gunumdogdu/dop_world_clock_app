@@ -47,7 +47,11 @@ dependencies:
   #State
   get: ^4.6.5
   shared_preferences: ^2.1.0
-  intl: ^0.18.0
+  intl: ^0.17.0
+  get_storage: ^2.1.1
+  localization: ^2.1.0
+  easy_localization: ^3.0.1
+
   
 
 dev_dependencies:
@@ -84,6 +88,7 @@ flutter:
     - assets/icons/arrow-left.png
     - assets/icons/dot.svg
     - assets/icons/sun.svg
+    - assets/translations/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -13,13 +13,26 @@ class DateTimeController extends GetxController {
   var cityDay = ''.obs;
   var cityHour = ''.obs;
   var cityMin = ''.obs;
-  var hasError = false.obs; // Add this variable to track API errors
+  var hasError = false.obs;
 
-  late Timer _timer; // Add a timer to update the hour every minute
+  late Timer _timer;
+
+  @override
+  void onInit() {
+    super.onInit();
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(minutes: 1), (timer) {
+      cityHour.value = DateFormat.H().format(DateTime.now());
+      cityMin.value = DateFormat.m().format(DateTime.now());
+    });
+  }
 
   Future<void> fetchCityTime(String citynameforURL) async {
     isLoading.value = true;
-    hasError.value = false; // Reset the error flag
+    hasError.value = false;
     try {
       final response = await http.get(
           Uri.parse('http://worldtimeapi.org/api/timezone/$citynameforURL'));
@@ -31,31 +44,18 @@ class DateTimeController extends GetxController {
             .substring(0, _getGMTOffset(datetime).length - 3);
         cityDay.value = DateFormat.EEEE().format(datetime);
         cityHour.value = DateFormat.H().format(datetime);
-        cityMin.value = DateFormat.m().format(datetime);
+        cityMin.value = DateFormat('MM').format(datetime);
         cityName.value = citynameforURL;
       } else {
         cityTime.value = 'Error: ${response.reasonPhrase}';
-        hasError.value =
-            true; // Set the error flag if there is a problem with the API response
+        hasError.value = true;
       }
     } catch (error) {
       cityTime.value = 'Error: $error';
-      hasError.value =
-          true; // Set the error flag if there is an error with the API request
+      hasError.value = true;
     } finally {
       isLoading.value = false;
     }
-
-    // This function will re-try fetching the data after 5 seconds
-    void refetchCityTime(String citynameforURL) async {
-      await Future.delayed(Duration(seconds: 5)); // Wait for 5 seconds
-      if (cityTime.value.isEmpty) {
-        await fetchCityTime(citynameforURL);
-      }
-    }
-
-    // Call the refetchCityTime function every 5 seconds until the data is successfully fetched
-    refetchCityTime(citynameforURL);
   }
 
   String _getGMTOffset(DateTime datetime) {
@@ -66,7 +66,6 @@ class DateTimeController extends GetxController {
 
   @override
   void dispose() {
-    // Cancel the timer when the controller is disposed to avoid memory leaks
     _timer.cancel();
     super.dispose();
   }
