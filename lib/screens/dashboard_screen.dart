@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/cityname_controller.dart';
+
 import '../controller/datetime_controller.dart';
 import '../widgets/citynamebar.dart';
 import '../widgets/search_form.dart';
@@ -11,6 +12,8 @@ import '../widgets/topbar.dart';
 
 class DashBoardScreen extends StatelessWidget {
   final CityController cityController = Get.put(CityController());
+  final controller = Get.put(DateTimeController());
+  // final DateTimeController dateTimeController = Get.put(DateTimeController());
 
   DashBoardScreen({super.key});
 
@@ -40,6 +43,7 @@ class DashBoardScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final city = cityController.cities[index];
                             final List<String> cityData = city.name!.split('/');
+                            final citynameforURL = city.name;
                             String cityTitle =
                                 ''; // 'africa/Tanzania/Addisababa'
                             String citySubtitle = '';
@@ -58,12 +62,13 @@ class DashBoardScreen extends StatelessWidget {
                               ),
                               child: CityNameBar(
                                 routeTheTimeScreen: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (_) => TheTimeScreen(
-                                            cityUrl: city.name!,
-                                            continentName: citySubtitle,
-                                            city: cityTitle,
-                                          )));
+                                  controller
+                                      .fetchCityTime(citynameforURL!); //city
+                                  Get.toNamed('/thetime/', arguments: {
+                                    'city': cityTitle,
+                                    'cityUrl': city.name,
+                                    'continentName': citySubtitle,
+                                  });
                                 },
                                 nameOf: ('$citySubtitle $cityTitle'),
                               ),

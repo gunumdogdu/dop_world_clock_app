@@ -1,6 +1,7 @@
 import 'package:dop/constants/size.dart';
 import 'package:dop/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constants/color.dart';
 import '../constants/icons.dart';
@@ -15,13 +16,7 @@ class SplashScreen extends StatelessWidget {
         color: lightSecondaryColor,
       ),
       child: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) => DashBoardScreen(),
-            ),
-          );
-        },
+        onTap: () => Get.toNamed('/dashboard'),
         child: Image.asset(
           dopLogoIcon,
           scale: 1.a,

@@ -1,4 +1,6 @@
+import 'package:dop/screens/dashboard_screen.dart';
 import 'package:dop/screens/splash_screen.dart';
+import 'package:dop/screens/thetime_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,6 +23,18 @@ class MyApp extends StatelessWidget {
       theme: LightTheme.data,
       darkTheme: DarkTheme.data,
       home: const SplashScreen(),
+      unknownRoute:
+          GetPage(name: '/notfound', page: () => const SplashScreen()),
+      getPages: [
+        GetPage(
+          name: '/dashboard',
+          page: () => DashBoardScreen(),
+        ),
+        GetPage(
+          name: '/thetime/',
+          page: () => TheTimeScreen(),
+        )
+      ],
     );
   }
 }
