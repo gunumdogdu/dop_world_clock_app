@@ -2,11 +2,14 @@ import 'package:dop/constants/color.dart';
 import 'package:dop/constants/size.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../constants/icons.dart';
+import '../controller/search_controller.dart';
 
 class SearchForm extends StatelessWidget {
-  const SearchForm({
+  final searchController = Get.put(SearchController());
+  SearchForm({
     super.key,
   });
 
@@ -18,6 +21,9 @@ class SearchForm extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 33.w, vertical: 0),
         child: Form(
           child: TextFormField(
+            onChanged: (value) {
+              searchController.updateQuery(value);
+            },
             decoration: InputDecoration(
               hintText: 'Arama',
               hintStyle: Theme.of(context).textTheme.bodyLarge,

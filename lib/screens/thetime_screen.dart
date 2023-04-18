@@ -1,4 +1,3 @@
-import 'package:dop/constants/color.dart';
 import 'package:dop/constants/icons.dart';
 import 'package:dop/constants/size.dart';
 
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:dop/screens/dashboard_screen.dart';
 
 import '../controller/datetime_controller.dart';
 
@@ -48,10 +46,11 @@ class TheTimeScreen extends StatelessWidget {
         body: RefreshIndicator(
           onRefresh: () async {
             print('refreshing data...');
+            await Future.delayed(const Duration(seconds: 3));
             await controller.fetchCityTime(citynameforURL); // refresh data
           },
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             child: SizedBox(
               height: MediaQuery.of(context).size.height / 1.0,
               child: Obx(
@@ -61,161 +60,185 @@ class TheTimeScreen extends StatelessWidget {
                         backgroundColor:
                             Theme.of(context).colorScheme.secondary,
                       ))
-                    : Column(
-                        children: [
-                          Container(
-                            height: 111.h,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(kRadiusTopBar),
-                                bottomRight: Radius.circular(kRadiusTopBar),
+                    : controller.hasError.value
+                        ? Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Center(
+                              child: Text(
+                                controller.cityTime.value,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  top: 60.h,
-                                  bottom: null,
-                                  left: 33.w,
-                                  right: null,
-                                  child: IconButton(
-                                    onPressed: () => Get.back(),
-                                    icon: Image.asset(
-                                      arrowLeftPNG,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      scale: 0.6,
-                                      height: 24.a,
-                                      width: 24.a,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(bottom: 24.h),
-                                    child: Image.asset(
-                                      headlineImg,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      scale: 0.6,
-                                      height: 16.h,
-                                      width: 149.w,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 50.h,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          )
+                        : Column(
                             children: [
                               Container(
-                                height: 140.h,
-                                width: 140.w,
+                                height: 111.h,
+                                width: double.infinity,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: lightSecondaryColor, width: 2),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(14),
+                                  color: Theme.of(context).colorScheme.primary,
+                                  borderRadius: const BorderRadius.only(
+                                    bottomLeft: Radius.circular(kRadiusTopBar),
+                                    bottomRight: Radius.circular(kRadiusTopBar),
                                   ),
                                 ),
-                                child: Align(
-                                  child: Text(
-                                    controller.cityHour.value,
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      top: 60.h,
+                                      bottom: null,
+                                      left: 33.w,
+                                      right: null,
+                                      child: IconButton(
+                                        onPressed: () => Get.back(),
+                                        icon: Image.asset(
+                                          arrowLeftPNG,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          scale: 0.6,
+                                          height: 24.a,
+                                          width: 24.a,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(bottom: 24.h),
+                                        child: Image.asset(
+                                          headlineImg,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          scale: 0.6,
+                                          height: 16.h,
+                                          width: 149.w,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
+                              ),
+                              SizedBox(
+                                height: 50.h,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: 140.h,
+                                    width: 140.w,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          width: 2),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(14),
+                                      ),
+                                    ),
+                                    child: Align(
+                                      child: Text(
+                                        controller.cityHour.value,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                      ),
+                                    ),
+                                  ),
+                                  Column(
+                                    children: [
+                                      SizedBox(
+                                        width: 29.w,
+                                        child: SvgPicture.asset(
+                                          dotIcon,
+                                          // ignore: deprecated_member_use
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 16.h,
+                                      ),
+                                      SizedBox(
+                                        width: 29.w,
+                                        child: SvgPicture.asset(
+                                          dotIcon,
+                                          // ignore: deprecated_member_use
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: 140.h,
+                                    width: 140.w,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          width: 2),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(14),
+                                      ),
+                                    ),
+                                    child: Align(
+                                      child: Text(
+                                        controller.cityMin.value,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleLarge,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 28.h,
                               ),
                               Column(
                                 children: [
-                                  SizedBox(
-                                    width: 29.w,
-                                    child: SvgPicture.asset(
-                                      dotIcon,
-                                      // ignore: deprecated_member_use
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
+                                  Text(
+                                    '$cityF',
+                                    style:
+                                        Theme.of(context).textTheme.titleMedium,
                                   ),
-                                  SizedBox(
-                                    height: 16.h,
-                                  ),
-                                  SizedBox(
-                                    width: 29.w,
-                                    child: SvgPicture.asset(
-                                      dotIcon,
-                                      // ignore: deprecated_member_use
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                    ),
-                                  ),
+                                  Text(
+                                    '$continentNameF',
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall,
+                                  )
                                 ],
                               ),
-                              Container(
-                                height: 140.h,
-                                width: 140.w,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: lightSecondaryColor, width: 2),
-                                  borderRadius: const BorderRadius.all(
-                                    Radius.circular(14),
-                                  ),
-                                ),
-                                child: Align(
-                                  child: Text(
-                                    controller.cityMin.value,
-                                    style:
-                                        Theme.of(context).textTheme.titleLarge,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 28.h,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                '$cityF',
-                                style: Theme.of(context).textTheme.titleMedium,
+                              SizedBox(
+                                height: 10.h,
                               ),
-                              Text(
-                                '$continentNameF',
-                                style: Theme.of(context).textTheme.titleSmall,
+                              Column(
+                                children: [
+                                  Text(
+                                    controller.cityDay.value +
+                                        comma +
+                                        controller.cityGMT.value,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  ),
+                                  Text(
+                                    controller.cityTime.value,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall,
+                                  )
+                                ],
                               )
                             ],
                           ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                controller.cityDay.value +
-                                    comma +
-                                    controller.cityGMT.value,
-                                style: Theme.of(context).textTheme.displaySmall,
-                              ),
-                              Text(
-                                controller.cityTime.value,
-                                style: Theme.of(context).textTheme.displaySmall,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
               ),
             ),
           ),

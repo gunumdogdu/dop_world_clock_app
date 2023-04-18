@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import '../controller/cityname_controller.dart';
 
 import '../controller/datetime_controller.dart';
+import '../controller/search_controller.dart';
 import '../widgets/citynamebar.dart';
 import '../widgets/search_form.dart';
 import '../widgets/topbar.dart';
@@ -13,6 +14,7 @@ import '../widgets/topbar.dart';
 class DashBoardScreen extends StatelessWidget {
   final CityController cityController = Get.put(CityController());
   final controller = Get.put(DateTimeController());
+  final searchController = Get.put(SearchController());
   // final DateTimeController dateTimeController = Get.put(DateTimeController());
 
   DashBoardScreen({super.key});
@@ -27,7 +29,7 @@ class DashBoardScreen extends StatelessWidget {
             children: [
               TopBar(),
               SizedBox(
-                height: 30.h,
+                height: 0.1.h,
               ),
               Expanded(
                 child: Builder(
@@ -38,14 +40,19 @@ class DashBoardScreen extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         );
                       } else {
+                        final query =
+                            searchController.query.value.toLowerCase();
+                        final filteredCities = cityController.cities
+                            .where((city) =>
+                                city.name!.toLowerCase().contains(query))
+                            .toList();
                         return ListView.builder(
-                          itemCount: cityController.cities.length,
+                          itemCount: filteredCities.length,
                           itemBuilder: (context, index) {
-                            final city = cityController.cities[index];
+                            final city = filteredCities[index];
                             final List<String> cityData = city.name!.split('/');
                             final citynameforURL = city.name;
-                            String cityTitle =
-                                ''; // 'africa/Tanzania/Addisababa'
+                            String cityTitle = '';
                             String citySubtitle = '';
                             if (cityData.length >= 3) {
                               cityTitle = cityData[2];
