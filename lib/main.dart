@@ -1,23 +1,31 @@
-import 'package:dop/constants/lang.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'controller/themecontroller.dart';
+import 'package:intl/intl.dart';
+
+import 'package:dop/generated/locale_keys.g.dart';
+import 'package:dop/generated/CodeGenerator.g.dart';
 import 'package:dop/screens/dashboard_screen.dart';
 import 'package:dop/screens/splash_screen.dart';
 import 'package:dop/screens/thetime_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_local.dart';
-
-import 'controller/themecontroller.dart';
-
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
   Get.put(ThemeController());
+
   runApp(
-      // EasyLocalization(
-      //   child:
-      const MyApp());
-  // supportedLocales: LangManager.instance.supportedLocales,
-  // path: ApplicationConstants.LANG_ASSET_PATH));
+    EasyLocalization(
+      supportedLocales: [Locale('en', 'US'), Locale('tr', 'TR')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('en', 'US'),
+      startLocale: Locale('en', 'US'),
+      child: MyApp(),
+      assetLoader: CodegenLoader(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,8 +34,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      locale: const Locale('tr', 'TR'),
-      fallbackLocale: const Locale('en', 'US'),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'DOP',
       theme: LightTheme.data,
@@ -48,3 +57,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+// flutter pub run easy_localization:generate -S assets/translations -f keys -o locale_keys.g.dart SCRIPT FOR GENERATE
+// flutter pub run easy_localization:generate -S assets/translations -o locale_keys.g.dart

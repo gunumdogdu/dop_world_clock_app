@@ -29,7 +29,7 @@ class TopBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const WelcomeDetail(),
+          WelcomeDetail(),
           Padding(
             padding: EdgeInsets.only(
               right: 33.w,
