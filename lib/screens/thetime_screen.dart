@@ -47,7 +47,8 @@ class TheTimeScreen extends StatelessWidget {
           onRefresh: () async {
             print('refreshing data...');
             await Future.delayed(const Duration(seconds: 3));
-            await controller.fetchCityTime(citynameforURL); // refresh data
+            await controller.fetchCityTime(
+                citynameforURL, context); // refresh data
           },
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),

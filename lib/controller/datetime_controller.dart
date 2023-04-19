@@ -1,12 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:dio/dio.dart';
+import 'package:dop/widgets/welcome_detail.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
 class DateTimeController extends GetxController {
+  final langdetail = Get.put(WelcomeDetail());
   var isLoading = true.obs;
   var cityTime = ''.obs;
   var cityName = ''.obs;
@@ -14,6 +18,8 @@ class DateTimeController extends GetxController {
   var cityDay = ''.obs;
   var cityHour = ''.obs;
   var cityMin = ''.obs;
+  var localeString = ''.obs;
+  var newLocale = ''.obs;
   var hasError = false.obs;
   var hasData = true.obs;
 
@@ -32,7 +38,10 @@ class DateTimeController extends GetxController {
     });
   }
 
-  Future<void> fetchCityTime(String citynameforURL) async {
+  Future<void> fetchCityTime(
+    String citynameforURL,
+    BuildContext context,
+  ) async {
     isLoading.value = true;
     hasError.value = false;
     hasData.value = false;
@@ -43,10 +52,13 @@ class DateTimeController extends GetxController {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         final datetime = DateTime.parse(data['datetime']).toLocal();
-        cityTime.value = DateFormat('MMMM d, y').format(datetime);
+        String localeCode =
+            Localizations.localeOf(context).toString().split('_')[0];
+        cityTime.value = DateFormat('MMMM d, y', localeCode).format(datetime);
+        cityDay.value = DateFormat.EEEE(localeCode).format(datetime);
+
         cityGMT.value = _getGMTOffset(datetime)
             .substring(0, _getGMTOffset(datetime).length - 3);
-        cityDay.value = DateFormat.EEEE().format(datetime);
         cityHour.value = DateFormat.H().format(datetime);
         cityMin.value =
             DateFormat('mm').format(datetime); // Use 'mm' for minutes

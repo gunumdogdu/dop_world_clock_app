@@ -16,11 +16,11 @@ class CodegenLoader extends AssetLoader {
 
   static const Map<String, dynamic> tr_TR = {
     "goodmorning": "Günaydın",
-    "world": "World"
+    "button_text": "TR"
   };
   static const Map<String, dynamic> en_US = {
     "goodmorning": "Good Morning",
-    "world": "World"
+    "button_text": "EN"
   };
   static const Map<String, Map<String, dynamic>> mapLocales = {
     "tr_TR": tr_TR,

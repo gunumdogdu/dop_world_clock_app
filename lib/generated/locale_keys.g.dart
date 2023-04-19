@@ -1,7 +1,6 @@
 // DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
 
-abstract class  LocaleKeys {
+abstract class LocaleKeys {
   static const goodmorning = 'goodmorning';
-  static const world = 'world';
-
+  static const button_text = 'EN';
 }

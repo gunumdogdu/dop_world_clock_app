@@ -69,8 +69,8 @@ class DashBoardScreen extends StatelessWidget {
                               ),
                               child: CityNameBar(
                                 routeTheTimeScreen: () {
-                                  controller
-                                      .fetchCityTime(citynameforURL!); //city
+                                  controller.fetchCityTime(
+                                      citynameforURL!, context); //city
                                   Get.toNamed('/thetime/', arguments: {
                                     'city': cityTitle,
                                     'loadCheck': citynameforURL,
